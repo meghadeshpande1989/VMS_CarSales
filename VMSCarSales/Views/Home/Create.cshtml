@@ -1,0 +1,99 @@
+﻿
+@{
+    ViewBag.Title = "Create";
+}
+
+<div ng-controller="HomeController">
+    <div id="container">
+
+        <div class="form-group">
+            <button type="button" class="btn btn-success" data-target="#addCar" data-toggle="modal"><i class="fa fa-plus"> </i> Add New</button>
+        </div>
+       
+        <table class="table table-bordered table-condensed table-hover table-responsive">
+            <thead>
+                <tr>
+                    <td>Engine</td>
+                    <td>Body Type</td>
+                    <td>Vehicle Type</td>
+                    <td>Make</td>
+                    <td>Model</td>
+                    <td>No. of Doors</td>
+                    <td>No. of Wheels</td>
+                </tr>
+            </thead>
+            <tr ng-repeat="car in cars">
+                <td>{{car.Engine}}</td>
+                <td>{{car.BodyType}}</td>
+                <td>{{car.VehicleType}}</td>
+                <td>{{car.Make}}</td>
+                <td>{{car.VehicleModel}}</td>
+                <td>{{car.Doors}}</td>
+                <td>{{car.Wheels}}</td>
+            </tr>
+        </table>
+        <div id="addCar" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">×</button>
+                        <h4 class="modal-title">Add Details</h4>
+                    </div>
+                    <form name="vehicleForm" novalidate>
+                        <div class="modal-body">
+
+                            <input type="hidden" class="form-control" ng-model="id">
+                            <div class="form-group">
+                                <label for="engine">Engine:</label>
+                                <input type="text" name="engine" class="form-control" id="engine" ng-model='engine' maxlength="50" ng-required="true">
+                                <span style="color:red" ng-show="vehicleForm.engine.$touched && vehicleForm.engine.$error.required">Engine is required.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicleType">Vehicle Type:</label><br />
+                                <select ng-model='vehicleType' class="form-control" name="vehicleType" ng-required="true">
+                                    <option value="">--Select Vehicle Type--</option>
+                                    <option ng-repeat="x in vehicleList" value="{{x.name}}">{{x.name}}</option>
+                                </select>
+                                <span style="color:red" ng-show="vehicleForm.vehicleType.$error.required">Select Vehicle Type is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="make">Make:</label>
+                                <input type="text" class="form-control" id="make" ng-model='make' ng-required="true" name="make">
+                                <span style="color:red" ng-show="vehicleForm.make.$touched && vehicleForm.make.$error.required">Make is required.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="vehicleModel">Model:</label>
+                                <input type="text" class="form-control" id="vehicleModel" ng-model='vehicleModel' name="vehicleModel" ng-required="true">
+                                <span style="color:red" ng-show="vehicleForm.vehicleModel.$touched && vehicleForm.vehicleModel.$error.required">Model is required.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="bodyType">Body Type:</label>
+                                <select ng-model='bodyType' class="form-control" ng-required="true" name="bodyType">
+                                    <option value="">--Select Body Type--</option>
+                                    <option ng-repeat="x in bodyTypeList" value="{{x.name}}">{{x.name}}</option>
+                                </select>
+                                <span style="color:red" ng-show="vehicleForm.bodyType.$error.required">Select Body Type is required</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="doors">No. of Doors:</label>
+                                <input type="number" class="form-control" id="doors" ng-model='doors' maxlength="2" ng-required="true" name="doors">
+                                <span style="color:red" ng-show="vehicleForm.doors.$touched && vehicleForm.doors.$error.required">No. of doors is required.</span>
+                            </div>
+                            <div class="form-group">
+                                <label for="wheels">No. of Wheels:</label>
+                                <input type="number" class="form-control" id="wheels" ng-model='wheels' maxlength="2" ng-required="true" name="wheels">
+                                <span style="color:red" ng-show="vehicleForm.wheels.$touched && vehicleForm.wheels.$error.required">No. of wheels is required.</span>
+                            </div>
+                      
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-close"></i> Close</button>
+                            <button type="submit" class="btn btn-success" ng-click="SaveCar()"><i class="fa fa-save"></i> Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
