@@ -25,7 +25,8 @@
                 if (VehicleModel.VehicleType == 'Car') {
                     if ((VehicleModel.Doors == 2 || VehicleModel.Doors == 4) && (VehicleModel.Wheels == 4 )) {
                         var requestResponse = dataService.AddCar(VehicleModel);
-                        alert('Data Saved successfully');
+                        Message(requestResponse);
+                      
                     }
                     else {
 
@@ -44,7 +45,18 @@
                 })
             };  
            
-            
+            function Message(requestResponse) {
+                requestResponse.then(function successCallback(response) {
+                    GetCars();
+                    $('#addCar').modal('hide');
+                    // this callback will be called asynchronously
+                    // when the response is available
+                }, function errorCallback(response) {
+                    // called asynchronously if an error occurs
+                    // or server returns response with an error status.
+                });
+            }
+
         }
         ]);
 
